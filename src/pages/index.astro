@@ -1,17 +1,82 @@
 ---
-const nome = "Rafael"
+import Layout from '../layouts/Layout.astro';
+
+const nome = 'Rafael';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>{nome}</h1>
-	</body>
-</html>
+<Layout>
+  <main class="teste">
+    <p class="rotulo">Fase 2 · cores e fontes</p>
+
+    <h1>{nome} <span class="sobrenome">[Sobrenome]</span></h1>
+
+    <p class="frase">
+      Desenvolvedor de software. <em>Simples de usar</em>, sólido por dentro.
+    </p>
+
+    <a class="botao" href="#">Baixar currículo</a>
+
+    <p class="ano">2026</p>
+  </main>
+</Layout>
+
+<style>
+  .teste {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 80px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .rotulo {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  h1 {
+    font-size: 48px;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+  }
+
+  .sobrenome {
+    color: var(--text-dim);
+  }
+
+  .frase {
+    font-size: 24px;
+    color: var(--text-soft);
+  }
+
+  .frase em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .botao {
+    display: inline-flex;
+    align-items: center;
+    height: 46px;
+    padding: 0 18px;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-weight: 600;
+  }
+
+  .ano {
+    font-size: 92px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+  }
+</style>
