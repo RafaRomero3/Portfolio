@@ -1,0 +1,245 @@
+---
+import { perfil } from '../data/site';
+---
+
+<aside class="sidebar" aria-label="Perfil">
+  <div class="identidade">
+    <h1>{perfil.nome} <span class="sobrenome">{perfil.sobrenome}</span></h1>
+    <p class="linha">
+      <strong>{perfil.cargo}</strong> · {perfil.empresa} · {perfil.cidade}
+    </p>
+  </div>
+
+  {perfil.disponivel && (
+    <p class="selo">
+      <span class="bolinha" aria-hidden="true"></span>
+      Aberto a novas oportunidades
+    </p>
+  )}
+
+  <p class="bio">
+    {perfil.bio} <em>{perfil.frase}</em>
+  </p>
+
+  <div class="botoes">
+    <a href={perfil.links.curriculo} class="botao botao-destaque">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="M7 10l5 5 5-5"></path><path d="M5 21h14"></path></svg>
+      Baixar currículo
+    </a>
+    <a href={perfil.links.linkedin} class="botao" target="_blank" rel="noopener">LinkedIn</a>
+    <a href={perfil.links.github} class="botao" target="_blank" rel="noopener">GitHub</a>
+  </div>
+
+  <figure class="cartao" aria-label="Resumo">
+    <div class="cartao-topo" aria-hidden="true">
+      <span></span><span></span><span></span>
+      <code>rafael.json</code>
+    </div>
+    <dl>
+      {perfil.resumo.map((item) => (
+        <div class="linha-json">
+          <dt>{item.chave}</dt>
+          <dd>"{item.valor}"</dd>
+        </div>
+      ))}
+    </dl>
+  </figure>
+
+  <div class="ano-bloco" aria-hidden="true">
+    <p class="ano">2026</p>
+    <p class="ano-secao">Experiência</p>
+  </div>
+</aside>
+
+<style>
+  .sidebar {
+    padding: 40px 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  /* evita que os blocos encolham quando a coluna fixa tem altura limitada */
+  .sidebar > * {
+    flex-shrink: 0;
+  }
+
+  .identidade {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  h1 {
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+  }
+
+  .sobrenome {
+    color: var(--text-dim);
+  }
+
+  .linha {
+    color: var(--text-muted);
+  }
+
+  .linha strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .selo {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    font-size: 13px;
+    color: var(--text-soft);
+  }
+
+  .bolinha {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+
+  .bio {
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .bio em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--text);
+  }
+
+  .botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .botao {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 500;
+    transition: border-color 0.2s;
+  }
+
+  .botao:hover {
+    border-color: var(--text-dim);
+  }
+
+  .botao-destaque {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+    font-weight: 600;
+  }
+
+  .botao-destaque:hover {
+    border-color: var(--accent);
+    opacity: 0.9;
+  }
+
+  .cartao {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .cartao-topo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cartao-topo span {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--line-strong);
+  }
+
+  .cartao-topo code {
+    margin-left: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .cartao dl {
+    padding: 10px 16px 12px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+
+  .linha-json {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 5px 0;
+  }
+
+  .linha-json dt {
+    color: var(--text-dim);
+  }
+
+  .linha-json dd {
+    color: var(--accent);
+    text-align: right;
+  }
+
+  .ano-bloco {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 8px;
+  }
+
+  .ano {
+    font-size: 84px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+  }
+
+  .ano-secao {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 960px) {
+    .sidebar {
+      position: sticky;
+      top: 0;
+      max-height: 100vh;
+      overflow-y: auto;
+      padding-top: 40px;
+    }
+
+    .ano-bloco {
+      display: flex;
+    }
+  }
+</style>

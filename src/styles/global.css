@@ -1,42 +1,28 @@
-/* =========================================================
-   CORES, FONTES E MEDIDAS DO PORTFÓLIO
-   ========================================================= */
 :root {
-  /* Fundos */
-  --bg: #0d0e10;          /* fundo da página */
-  --surface: #15171a;     /* fundo de cartões */
-  --surface-2: #1b1e22;   /* fundo de elementos dentro de cartões */
+  --bg: #0d0e10;
+  --surface: #15171a;
+  --surface-2: #1b1e22;
 
-  /* Linhas e bordas */
-  --line: #23262b;        /* divisórias sutis */
-  --line-strong: #34383e; /* bordas de botões */
+  --line: #23262b;
+  --line-strong: #34383e;
 
-  /* Textos (do mais forte para o mais fraco) */
-  --text: #edece6;        /* títulos e texto principal */
-  --text-soft: #c9cbcd;   /* texto secundário */
-  --text-muted: #a3a6aa;  /* parágrafos longos */
-  --text-dim: #8d9094;    /* rótulos e datas */
+  --text: #edece6;
+  --text-soft: #c9cbcd;
+  --text-muted: #a3a6aa;
+  --text-dim: #8d9094;
 
-  /* Cor de destaque */
-  --accent: #d7ff4a;      /* verde-limão */
-  --accent-ink: #0d0e10;  /* texto em cima da cor de destaque */
+  --accent: #d7ff4a;
+  --accent-ink: #0d0e10;
 
-  /* Fontes */
   --font-sans: 'Geist Variable', system-ui, sans-serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
   --font-serif: 'Instrument Serif', Georgia, serif;
 
-  /* Medidas */
   --max-width: 1200px;
   --radius: 10px;
   --radius-lg: 18px;
 }
 
-/* =========================================================
-   AJUSTES BÁSICOS (o "reset")
-   Os navegadores vêm com margens e tamanhos padrão diferentes.
-   Estas regras deixam tudo previsível.
-   ========================================================= */
 *,
 *::before,
 *::after {
@@ -76,14 +62,12 @@ img {
   color: var(--accent-ink);
 }
 
-/* Contorno visível para quem navega pelo teclado (acessibilidade) */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
-/* Quem pediu menos animação no sistema não vê animações */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

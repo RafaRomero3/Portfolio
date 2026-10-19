@@ -1,82 +1,77 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Sidebar from '../components/Sidebar.astro';
 
-const nome = 'Rafael';
+// provisório: só para testar a rolagem
+const secoes = [
+  { id: 'experiencia', titulo: 'Experiência' },
+  { id: 'projetos', titulo: 'Projetos' },
+  { id: 'stack', titulo: 'Stack' },
+  { id: 'formacao', titulo: 'Formação & certificações' },
+  { id: 'contato', titulo: 'Contato' },
+];
 ---
 
 <Layout>
-  <main class="teste">
-    <p class="rotulo">Fase 2 · cores e fontes</p>
+  <Header />
 
-    <h1>{nome} <span class="sobrenome">[Sobrenome]</span></h1>
+  <div class="colunas">
+    <Sidebar />
 
-    <p class="frase">
-      Desenvolvedor de software. <em>Simples de usar</em>, sólido por dentro.
-    </p>
-
-    <a class="botao" href="#">Baixar currículo</a>
-
-    <p class="ano">2026</p>
-  </main>
+    <main class="conteudo">
+      {secoes.map((secao) => (
+        <section id={secao.id} class="secao">
+          <h2>{secao.titulo}</h2>
+          <div class="provisorio">Conteúdo da seção (Fase 4)</div>
+        </section>
+      ))}
+    </main>
+  </div>
 </Layout>
 
 <style>
-  .teste {
+  .colunas {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 80px 24px;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .conteudo {
+    min-width: 0;
+    padding-bottom: 64px;
+  }
+
+  .secao {
+    padding-top: 48px;
+  }
+
+  h2 {
+    font-size: 30px;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    padding-bottom: 20px;
+  }
+
+  .provisorio {
+    height: 520px;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius-lg);
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-  }
-
-  .rotulo {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-  }
-
-  h1 {
-    font-size: 48px;
-    line-height: 1.05;
-    letter-spacing: -0.035em;
-    font-weight: 600;
-  }
-
-  .sobrenome {
-    color: var(--text-dim);
-  }
-
-  .frase {
-    font-size: 24px;
-    color: var(--text-soft);
-  }
-
-  .frase em {
-    font-family: var(--font-serif);
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  .botao {
-    display: inline-flex;
     align-items: center;
-    height: 46px;
-    padding: 0 18px;
-    border-radius: var(--radius);
-    background: var(--accent);
-    color: var(--accent-ink);
-    font-weight: 600;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-dim);
   }
 
-  .ano {
-    font-size: 92px;
-    line-height: 1;
-    font-weight: 600;
-    letter-spacing: -0.04em;
-    color: var(--accent);
+  @media (min-width: 960px) {
+    .colunas {
+      grid-template-columns: 360px minmax(0, 1fr);
+      gap: 72px;
+      align-items: start; /* sem isso o sticky da Sidebar não funciona */
+    }
   }
 </style>
