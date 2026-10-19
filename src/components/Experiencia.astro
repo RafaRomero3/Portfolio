@@ -1,0 +1,140 @@
+---
+import { experiencias } from '../data/experiencia';
+import { formatarPeriodo } from '../utils/datas';
+
+const primeiroAno = Math.min(...experiencias.map((exp) => Number(exp.inicio.slice(0, 4))));
+---
+
+<section id="experiencia" class="secao" data-section="Experiência">
+  <div class="secao-topo">
+    <h2>Experiência</h2>
+    <p class="secao-meta">{experiencias.length} cargos · {primeiroAno} até hoje</p>
+  </div>
+
+  <ol class="linha-do-tempo">
+    {experiencias.map((exp) => (
+      <li class="item" data-year={exp.inicio.slice(0, 4)}>
+        <p class="periodo">{formatarPeriodo(exp.inicio, exp.fim)}</p>
+
+        <div class="empresa">
+          <span class="logo" aria-hidden="true">{exp.empresa[0]}</span>
+          <div>
+            <h3>{exp.empresa}</h3>
+            <p class="cargo">
+              {exp.cargo}{exp.local && ` · ${exp.local}`}
+            </p>
+          </div>
+        </div>
+
+        <ul class="conquistas">
+          {exp.conquistas.map((conquista) => <li>{conquista}</li>)}
+        </ul>
+
+        {exp.tecnologias.length > 0 && (
+          <p class="tags">{exp.tecnologias.join(' · ')}</p>
+        )}
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .linha-do-tempo {
+    position: relative;
+    padding: 0;
+    list-style: none;
+  }
+
+  .linha-do-tempo::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    bottom: 0;
+    left: 5px;
+    width: 1px;
+    background: var(--line-strong);
+  }
+
+  .item {
+    position: relative;
+    padding: 0 0 48px 36px;
+  }
+
+  .item:last-child {
+    padding-bottom: 0;
+  }
+
+  .item::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 11px;
+    height: 11px;
+    border: 2px solid var(--line-strong);
+    border-radius: 999px;
+    background: var(--bg);
+  }
+
+  .periodo {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .empresa {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 12px;
+  }
+
+  .logo {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    font-family: var(--font-mono);
+    font-size: 18px;
+    color: var(--accent);
+  }
+
+  h3 {
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+
+  .cargo {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .conquistas {
+    display: grid;
+    gap: 8px;
+    margin-top: 16px;
+    padding-left: 18px;
+    color: var(--text-soft);
+  }
+
+  .conquistas li::marker {
+    color: var(--text-dim);
+  }
+
+  .tags {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+</style>

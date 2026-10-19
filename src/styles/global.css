@@ -19,6 +19,7 @@
   --font-serif: 'Instrument Serif', Georgia, serif;
 
   --max-width: 1200px;
+  --header-h: 64px;
   --radius: 10px;
   --radius-lg: 18px;
 }
@@ -31,6 +32,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
 }
 
 body {
@@ -60,6 +62,32 @@ img {
 ::selection {
   background: var(--accent);
   color: var(--accent-ink);
+}
+
+.secao {
+  padding-top: 56px;
+}
+
+.secao-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 16px;
+  padding-bottom: 28px;
+}
+
+.secao-topo h2 {
+  font-size: 30px;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+.secao-meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
 }
 
 :focus-visible {

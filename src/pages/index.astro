@@ -2,13 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Sidebar from '../components/Sidebar.astro';
+import Experiencia from '../components/Experiencia.astro';
+import Stack from '../components/Stack.astro';
+import Formacao from '../components/Formacao.astro';
+
 
 // provisório: só para testar a rolagem
 const secoes = [
-  { id: 'experiencia', titulo: 'Experiência' },
   { id: 'projetos', titulo: 'Projetos' },
-  { id: 'stack', titulo: 'Stack' },
-  { id: 'formacao', titulo: 'Formação & certificações' },
   { id: 'contato', titulo: 'Contato' },
 ];
 ---
@@ -20,12 +21,19 @@ const secoes = [
     <Sidebar />
 
     <main class="conteudo">
+      <Experiencia />
+
       {secoes.map((secao) => (
-        <section id={secao.id} class="secao">
-          <h2>{secao.titulo}</h2>
+        <section id={secao.id} class="secao" data-section={secao.titulo}>
+          <div class="secao-topo">
+            <h2>{secao.titulo}</h2>
+          </div>
           <div class="provisorio">Conteúdo da seção (Fase 4)</div>
         </section>
       ))}
+
+      <Stack />
+      <Formacao />
     </main>
   </div>
 </Layout>
@@ -42,17 +50,6 @@ const secoes = [
   .conteudo {
     min-width: 0;
     padding-bottom: 64px;
-  }
-
-  .secao {
-    padding-top: 48px;
-  }
-
-  h2 {
-    font-size: 30px;
-    letter-spacing: -0.025em;
-    font-weight: 600;
-    padding-bottom: 20px;
   }
 
   .provisorio {

@@ -20,13 +20,18 @@ import { perfil } from '../data/site';
 
 <style>
   .header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
     border-bottom: 1px solid var(--line);
+    background: var(--bg);
   }
 
   .nav {
     max-width: var(--max-width);
+    min-height: var(--header-h);
     margin: 0 auto;
-    padding: 12px 24px;
+    padding: 0 24px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -96,7 +101,7 @@ import { perfil } from '../data/site';
     display: none;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 768px) {
     .papel {
       display: inline;
     }
