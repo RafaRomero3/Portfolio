@@ -1,0 +1,46 @@
+---
+import { perfil } from '../data/site';
+
+const ano = new Date().getFullYear();
+---
+
+<footer class="rodape">
+  <div class="interno">
+    <p>© {ano} {perfil.nome} {perfil.sobrenome}</p>
+    <p>
+      Feito com Astro ·
+      <a href="https://github.com/RafaRomero3/portfolio" target="_blank" rel="noopener">código</a> ·
+      <a href="#topo">voltar ao topo ↑</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .rodape {
+    border-top: 1px solid var(--line);
+  }
+
+  .interno {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  a {
+    color: var(--text-soft);
+    transition: color 0.2s;
+  }
+
+  a:hover {
+    color: var(--text);
+  }
+</style>

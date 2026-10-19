@@ -1,0 +1,50 @@
+---
+import { perfil } from '../data/site';
+---
+
+<section id="contato" class="secao contato" data-section="Contato">
+  <p class="secao-meta">Contato</p>
+  <h2>Vamos <em>conversar?</em></h2>
+  <p class="texto">
+    Estou aberto a novas oportunidades. O jeito mais rápido de falar comigo é por e-mail.
+  </p>
+
+  <div class="botoes">
+    <a href={`mailto:${perfil.email}`} class="botao botao-destaque">{perfil.email}</a>
+    <a href={perfil.links.linkedin} class="botao" target="_blank" rel="noopener">LinkedIn</a>
+    <a href={perfil.links.github} class="botao" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</section>
+
+<style>
+  .contato {
+    padding-top: 96px;
+  }
+
+  h2 {
+    margin-top: 12px;
+    font-size: clamp(40px, 7vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+  }
+
+  h2 em {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .texto {
+    max-width: 46ch;
+    margin-top: 16px;
+    color: var(--text-muted);
+  }
+
+  .botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 28px;
+  }
+</style>

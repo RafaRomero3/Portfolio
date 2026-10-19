@@ -5,12 +5,13 @@ import Sidebar from '../components/Sidebar.astro';
 import Experiencia from '../components/Experiencia.astro';
 import Stack from '../components/Stack.astro';
 import Formacao from '../components/Formacao.astro';
+import Contato from '../components/Contato.astro';
+import Rodape from '../components/Rodape.astro';
 
 
 // provisório: só para testar a rolagem
 const secoes = [
-  { id: 'projetos', titulo: 'Projetos' },
-  { id: 'contato', titulo: 'Contato' },
+  { id: 'projetos', titulo: 'Projetos' }
 ];
 ---
 
@@ -34,8 +35,11 @@ const secoes = [
 
       <Stack />
       <Formacao />
+      <Contato />
     </main>
   </div>
+  <Rodape />
+
 </Layout>
 
 <style>
