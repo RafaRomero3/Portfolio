@@ -186,6 +186,19 @@ import { perfil } from '../data/site';
     height: 8px;
     border-radius: 999px;
     background: var(--line-strong);
+    transition: background 0.2s;
+  }
+
+  .cartao:hover .cartao-topo span:nth-child(1) {
+    background: var(--dot-red);
+  }
+
+  .cartao:hover .cartao-topo span:nth-child(2) {
+    background: var(--dot-yellow);
+  }
+
+  .cartao:hover .cartao-topo span:nth-child(3) {
+    background: var(--dot-green);
   }
 
   .cartao-topo code {
@@ -315,7 +328,7 @@ import { perfil } from '../data/site';
       height: calc(100vh - var(--header-h));
       overflow-y: auto;
       scrollbar-width: none;
-      padding: clamp(16px, 4vh, 40px) 0 clamp(16px, 3vh, 32px);
+      padding: clamp(16px, 4vh, 40px) 0 clamp(28px, 5vh, 56px);
       gap: clamp(10px, 2vh, 18px);
     }
 
@@ -330,6 +343,45 @@ import { perfil } from '../data/site';
     .api {
       display: block;
       margin-top: auto;
+    }
+  }
+
+  @media (min-width: 960px) and (max-height: 800px) {
+    .sidebar {
+      padding: 16px 0 24px;
+      gap: 10px;
+    }
+
+    .identidade {
+      gap: 4px;
+    }
+
+    .selo {
+      padding: 3px 12px;
+    }
+
+    .botao {
+      height: 40px;
+    }
+
+    .cartao-topo {
+      padding: 6px 14px;
+    }
+
+    .linha-json {
+      padding: 2px 0;
+    }
+
+    .api-corpo {
+      gap: 8px;
+      padding: 10px 16px 12px;
+    }
+  }
+
+  /* o rafael.json repete empresa, cargo e cidade, que já aparecem no topo */
+  @media (min-width: 960px) and (max-height: 675px) {
+    .cartao:not(.api) {
+      display: none;
     }
   }
 </style>
