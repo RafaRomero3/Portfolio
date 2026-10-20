@@ -18,7 +18,7 @@ import { perfil } from '../data/site';
   )}
 
   <p class="bio">
-    {perfil.bio} <em>{perfil.frase}</em>
+    {perfil.bio} 
   </p>
 
   <div class="botoes">
@@ -103,23 +103,45 @@ import { perfil } from '../data/site';
   }
 
   .bolinha {
+    position: relative;
     width: 7px;
     height: 7px;
     border-radius: 999px;
     background: var(--accent);
   }
 
-  .bio {
-    color: var(--text-muted);
-    line-height: 1.65;
+  .bolinha::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--accent);
+    animation: pulso 2s ease-out infinite;
   }
 
-  .bio em {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 19px;
-    color: var(--text);
+  @keyframes pulso {
+    from {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    to {
+      transform: scale(3);
+      opacity: 0;
+    }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bolinha::after {
+      animation: none;
+    }
+  }
+
+  .bio {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
 
   .botoes {
     display: flex;
@@ -157,7 +179,7 @@ import { perfil } from '../data/site';
   }
 
   .cartao dl {
-    padding: 10px 16px 12px;
+    padding: 8px 16px 10px;
     font-family: var(--font-mono);
     font-size: 13px;
   }
@@ -166,7 +188,7 @@ import { perfil } from '../data/site';
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    padding: 5px 0;
+    padding: 3px 0;
   }
 
   .linha-json dt {
@@ -181,8 +203,7 @@ import { perfil } from '../data/site';
   .ano-bloco {
     display: none;
     flex-direction: column;
-    gap: 8px;
-    padding-top: 8px;
+    gap: 4px;
   }
 
   .ano {
@@ -204,13 +225,29 @@ import { perfil } from '../data/site';
     .sidebar {
       position: sticky;
       top: var(--header-h);
-      max-height: calc(100vh - var(--header-h));
+      height: calc(100vh - var(--header-h));
       overflow-y: auto;
-      padding-top: 40px;
+      scrollbar-width: none;
+      padding: clamp(16px, 4vh, 40px) 0 clamp(16px, 3vh, 32px);
+      gap: clamp(10px, 2vh, 18px);
+    }
+
+    .sidebar::-webkit-scrollbar {
+      display: none;
+    }
+
+    h1 {
+      font-size: clamp(32px, 5.5vh, 44px);
     }
 
     .ano-bloco {
       display: flex;
+      margin-top: auto;
+    }
+
+    .ano {
+      font-size: clamp(56px, 11vh, 96px);
     }
   }
+
 </style>

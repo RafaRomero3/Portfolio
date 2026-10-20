@@ -6,8 +6,7 @@ export const perfil = {
   cidade: 'São Caetano do Sul, SP',
   disponivel: true, // mostra o selo "Aberto a novas oportunidades"
   email: 'romerorafa1902@gmail.com',
-  bio: 'Desenvolvedor back-end com Node.js e NestJS. Trabalho com APIs REST, autenticação JWT/OAuth e bancos relacionais e não relacionais, e na MobileMed levei uma API assíncrona de relatórios do desenvolvimento à produção.',
-  frase: 'Simples de usar, sólido por dentro.',
+  bio: 'Desenvolvedor back-end com Node.js e NestJS, focado em APIs REST, autenticação e bancos de dados relacionais e não relacionais.',
   links: {
     curriculo: '/curriculo.pdf',
     linkedin: 'https://www.linkedin.com/in/rafael-oliveira-romero',

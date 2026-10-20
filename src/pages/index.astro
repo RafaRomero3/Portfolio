@@ -1,18 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Sidebar from '../components/Sidebar.astro';
-import Experiencia from '../components/Experiencia.astro';
-import Stack from '../components/Stack.astro';
-import Formacao from '../components/Formacao.astro';
-import Contato from '../components/Contato.astro';
-import Rodape from '../components/Rodape.astro';
-
-
-// provisório: só para testar a rolagem
-const secoes = [
-  { id: 'projetos', titulo: 'Projetos' }
-];
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Experiencia from "../components/Experiencia.astro";
+import Stack from "../components/Stack.astro";
+import Formacao from "../components/Formacao.astro";
+import Contato from "../components/Contato.astro";
+import Rodape from "../components/Rodape.astro";
 ---
 
 <Layout>
@@ -23,23 +17,12 @@ const secoes = [
 
     <main class="conteudo">
       <Experiencia />
-
-      {secoes.map((secao) => (
-        <section id={secao.id} class="secao" data-section={secao.titulo}>
-          <div class="secao-topo">
-            <h2>{secao.titulo}</h2>
-          </div>
-          <div class="provisorio">Conteúdo da seção (Fase 4)</div>
-        </section>
-      ))}
-
       <Stack />
       <Formacao />
       <Contato />
     </main>
   </div>
   <Rodape />
-
 </Layout>
 
 <style>
@@ -54,18 +37,6 @@ const secoes = [
   .conteudo {
     min-width: 0;
     padding-bottom: 64px;
-  }
-
-  .provisorio {
-    height: 520px;
-    border: 1px dashed var(--line-strong);
-    border-radius: var(--radius-lg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--text-dim);
   }
 
   @media (min-width: 960px) {
