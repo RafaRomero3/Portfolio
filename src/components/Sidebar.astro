@@ -45,9 +45,25 @@ import { perfil } from '../data/site';
     </dl>
   </figure>
 
-  <div class="ano-bloco" aria-hidden="true">
-    <p class="ano">2026</p>
-    <p class="ano-secao">Experiência</p>
+  <div class="cartao api" aria-hidden="true">
+    <div class="cartao-topo">
+      <span></span><span></span><span></span>
+      <code>api.rafael.dev</code>
+    </div>
+    <div class="api-corpo">
+      <p class="api-requisicao">
+        <span class="api-metodo">GET</span>
+        <span class="api-rota"></span>
+      </p>
+      <p class="api-resposta">
+        <span class="api-status">···</span>
+        <span class="api-detalhe"></span>
+      </p>
+      <div class="api-progresso">
+        <div class="api-trilho"><div class="api-barra"></div></div>
+        <span class="api-contador">00 / 00</span>
+      </div>
+    </div>
   </div>
 </aside>
 
@@ -131,7 +147,8 @@ import { perfil } from '../data/site';
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .bolinha::after {
+    .bolinha::after,
+    .api-rota::after {
       animation: none;
     }
   }
@@ -200,25 +217,95 @@ import { perfil } from '../data/site';
     text-align: right;
   }
 
-  .ano-bloco {
+  .api {
     display: none;
-    flex-direction: column;
-    gap: 4px;
   }
 
-  .ano {
-    font-size: 84px;
-    line-height: 1;
-    font-weight: 600;
-    letter-spacing: -0.04em;
-    color: var(--accent);
-  }
-
-  .ano-secao {
+  .api-corpo {
+    display: grid;
+    gap: 10px;
+    padding: 14px 16px 16px;
     font-family: var(--font-mono);
+  }
+
+  .api-requisicao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .api-metodo {
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: var(--accent);
+    color: var(--accent-ink);
     font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .api-rota::after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 1.1em;
+    margin-left: 2px;
+    vertical-align: -3px;
+    background: var(--accent);
+    animation: piscar 1s steps(1) infinite;
+  }
+
+  @keyframes piscar {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .api-resposta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
+  }
+
+  .api-status {
+    color: var(--accent);
+    transition: color 0.2s;
+  }
+
+  .api.carregando .api-status {
+    color: var(--text-dim);
+  }
+
+  .api-detalhe {
+    color: var(--text-dim);
+    text-align: right;
+  }
+
+  .api-progresso {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .api-trilho {
+    flex: 1;
+    height: 2px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--line-strong);
+  }
+
+  .api-barra {
+    height: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
   }
 
   @media (min-width: 960px) {
@@ -240,14 +327,90 @@ import { perfil } from '../data/site';
       font-size: clamp(32px, 5.5vh, 44px);
     }
 
-    .ano-bloco {
-      display: flex;
+    .api {
+      display: block;
       margin-top: auto;
     }
-
-    .ano {
-      font-size: clamp(56px, 11vh, 96px);
-    }
   }
-
 </style>
+
+<script>
+  const painel = document.querySelector<HTMLElement>('.api');
+  const passos = Array.from(document.querySelectorAll<HTMLElement>('[data-endpoint]'));
+  const reduzirMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (painel && passos.length > 0) {
+    const metodo = painel.querySelector<HTMLElement>('.api-metodo')!;
+    const rota = painel.querySelector<HTMLElement>('.api-rota')!;
+    const status = painel.querySelector<HTMLElement>('.api-status')!;
+    const detalhe = painel.querySelector<HTMLElement>('.api-detalhe')!;
+    const contador = painel.querySelector<HTMLElement>('.api-contador')!;
+    const barra = painel.querySelector<HTMLElement>('.api-barra')!;
+
+    const total = String(passos.length).padStart(2, '0');
+    let atual = -1;
+    let timer: number | undefined;
+
+    const responder = (passo: HTMLElement) => {
+      painel.classList.remove('carregando');
+      status.textContent = passo.dataset.status ?? '200 OK';
+      detalhe.textContent = passo.dataset.detalhe ?? '';
+    };
+
+    const digitar = (caminho: string, passo: HTMLElement, letras: number) => {
+      rota.textContent = caminho.slice(0, letras);
+      if (letras < caminho.length) {
+        timer = window.setTimeout(() => digitar(caminho, passo, letras + 1), 30);
+      } else {
+        timer = window.setTimeout(() => responder(passo), 200);
+      }
+    };
+
+    const mostrar = (indice: number) => {
+      if (indice === atual) return;
+      atual = indice;
+
+      const passo = passos[indice];
+      const [verbo, caminho] = passo.dataset.endpoint!.split(' ');
+
+      passos.forEach((p, i) => p.classList.toggle('ativo', i === indice));
+      metodo.textContent = verbo;
+      contador.textContent = `${String(indice + 1).padStart(2, '0')} / ${total}`;
+      barra.style.transform = `scaleX(${(indice + 1) / passos.length})`;
+
+      clearTimeout(timer);
+
+      if (reduzirMovimento) {
+        rota.textContent = caminho;
+        responder(passo);
+        return;
+      }
+
+      painel.classList.add('carregando');
+      status.textContent = '···';
+      detalhe.textContent = '';
+
+      // mantém o trecho igual ao da rota anterior e digita só o resto
+      const anterior = rota.textContent ?? '';
+      let comum = 0;
+      while (comum < anterior.length && anterior[comum] === caminho[comum]) comum++;
+      digitar(caminho, passo, comum);
+    };
+
+    const atualizar = () => {
+      const meioDaTela = window.innerHeight * 0.5;
+      // no fim da página, o último passo pode nunca chegar ao meio da tela
+      const noFim = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+
+      let indice = 0;
+      passos.forEach((passo, i) => {
+        if (passo.getBoundingClientRect().top <= meioDaTela) indice = i;
+      });
+
+      mostrar(noFim ? passos.length - 1 : indice);
+    };
+
+    window.addEventListener('scroll', atualizar, { passive: true });
+    atualizar();
+  }
+</script>

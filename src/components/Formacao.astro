@@ -3,14 +3,18 @@ import { formacoes, idiomas } from '../data/formacao';
 import { formatarPeriodo } from '../utils/datas';
 ---
 
-<section id="formacao" class="secao" data-section="Formação">
+<section id="formacao" class="secao">
   <div class="secao-topo">
     <h2>Formação & idiomas</h2>
   </div>
 
   <ul class="lista">
     {formacoes.map((item) => (
-      <li class="cartao" data-year={item.inicio.slice(0, 4)}>
+      <li
+        class="cartao"
+        data-endpoint={`GET /formacao/${item.slug}`}
+        data-detalhe={formatarPeriodo(item.inicio, item.fim)}
+      >
         <p class="periodo">{formatarPeriodo(item.inicio, item.fim)}</p>
         <h3>{item.curso}</h3>
         <p class="detalhe">{item.instituicao} · {item.local}</p>

@@ -5,7 +5,7 @@ import { formatarPeriodo } from '../utils/datas';
 const primeiroAno = Math.min(...experiencias.map((exp) => Number(exp.inicio.slice(0, 4))));
 ---
 
-<section id="experiencia" class="secao" data-section="Experiência">
+<section id="experiencia" class="secao">
   <div class="secao-topo">
     <h2>Experiência</h2>
     <p class="secao-meta">{experiencias.length} cargos · {primeiroAno} até hoje</p>
@@ -13,7 +13,11 @@ const primeiroAno = Math.min(...experiencias.map((exp) => Number(exp.inicio.slic
 
   <ol class="linha-do-tempo">
     {experiencias.map((exp) => (
-      <li class="item" data-year={exp.inicio.slice(0, 4)}>
+      <li
+        class="item"
+        data-endpoint={`GET /experiencia/${exp.slug}`}
+        data-detalhe={formatarPeriodo(exp.inicio, exp.fim)}
+      >
         <p class="periodo">{formatarPeriodo(exp.inicio, exp.fim)}</p>
 
         <div class="empresa">
@@ -74,6 +78,13 @@ const primeiroAno = Math.min(...experiencias.map((exp) => Number(exp.inicio.slic
     border: 2px solid var(--line-strong);
     border-radius: 999px;
     background: var(--bg);
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .item.ativo::before {
+    border-color: var(--accent);
+    background: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
   }
 
   .periodo {

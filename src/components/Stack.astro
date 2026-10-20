@@ -4,7 +4,7 @@ import { stack } from '../data/stack';
 const total = stack.flatMap((grupo) => grupo.itens).length;
 ---
 
-<section id="stack" class="secao" data-section="Stack">
+<section id="stack" class="secao" data-endpoint="GET /stack" data-detalhe={`${total} tecnologias`}>
   <div class="secao-topo">
     <h2>Stack</h2>
     <p class="secao-meta">{stack.length} grupos · {total} tecnologias</p>

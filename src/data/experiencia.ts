@@ -1,5 +1,6 @@
 export interface Experiencia {
   empresa: string;
+  slug: string;
   cargo: string;
   local?: string;
   inicio: string; // 'AAAA-MM'
@@ -11,6 +12,7 @@ export interface Experiencia {
 export const experiencias: Experiencia[] = [
   {
     empresa: 'MobileMed',
+    slug: 'mobilemed',
     cargo: 'Desenvolvedor Back-end',
     local: 'Híbrido · São Bernardo do Campo, SP',
     inicio: '2025-06',
@@ -23,6 +25,7 @@ export const experiencias: Experiencia[] = [
   },
   {
     empresa: 'Grana Tech - Crédito Popular',
+    slug: 'grana-tech',
     cargo: 'Estágio de Desenvolvedor',
     local: 'Híbrido · São Paulo, SP',
     inicio: '2024-10',
@@ -36,6 +39,7 @@ export const experiencias: Experiencia[] = [
   },
   {
     empresa: 'Mazzaferro Pesca',
+    slug: 'mazzaferro-pesca',
     cargo: 'Estagiário de TI',
     local: 'Híbrido · Diadema, SP',
     inicio: '2024-04',
@@ -48,6 +52,7 @@ export const experiencias: Experiencia[] = [
   },
   {
     empresa: 'Formula 1',
+    slug: 'formula-1',
     cargo: 'Vendas e Tradução Freelancer',
     inicio: '2022-11',
     fim: '2022-11',
