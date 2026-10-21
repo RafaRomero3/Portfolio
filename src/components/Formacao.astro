@@ -23,14 +23,20 @@ import { formatarPeriodo } from '../utils/datas';
   </ul>
 
   <h3 class="subtitulo">Idiomas</h3>
-  <dl class="idiomas">
-    {idiomas.map((idioma) => (
-      <div class="idioma">
-        <dt>{idioma.nome}</dt>
-        <dd>{idioma.nivel}</dd>
+<ul class="idiomas">
+  {idiomas.map((idioma) => (
+    <li class="idioma">
+      <span class="sigla" aria-hidden="true">{idioma.sigla}</span>
+      <div>
+        <p class="nome">{idioma.nome}</p>
+        <p class="nivel">{idioma.nivel}</p>
       </div>
-    ))}
-  </dl>
+      <span class="medidor" role="img" aria-label={`Nível ${idioma.proficiencia} de 5`}>
+        {Array.from({ length: 5 }, (_, i) => <span class:list={{ cheio: i < idioma.proficiencia }} />)}
+      </span>
+    </li>
+  ))}
+</ul>
 </section>
 
 <style>
@@ -50,7 +56,7 @@ import { formatarPeriodo } from '../utils/datas';
 
   .periodo,
   .subtitulo,
-  .idioma dd {
+  .nivel {
     font-family: var(--font-mono);
     font-size: 12px;
     letter-spacing: 0.08em;
@@ -78,18 +84,57 @@ import { formatarPeriodo } from '../utils/datas';
   }
 
   .idiomas {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 12px;
+    padding: 0;
+    list-style: none;
   }
 
   .idioma {
-    padding: 12px 18px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 16px 14px;
+    padding: 18px 20px;
     border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
   }
 
-  .idioma dt {
-    font-weight: 500;
+  .sigla {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--accent);
   }
+
+  .nome {
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .medidor {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+
+  .medidor span {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--line-strong);
+  }
+
+  .medidor .cheio {
+    background: var(--accent);
+  }
+
 </style>

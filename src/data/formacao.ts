@@ -9,7 +9,9 @@ export interface Formacao {
 
 export interface Idioma {
   nome: string;
+  sigla: string;
   nivel: string;
+  proficiencia: number; // de 1 a 5, como no currículo
 }
 
 export const formacoes: Formacao[] = [
@@ -24,6 +26,6 @@ export const formacoes: Formacao[] = [
 ];
 
 export const idiomas: Idioma[] = [
-  { nome: 'Português', nivel: 'Nativo' },
-  { nome: 'Inglês', nivel: 'Avançado' },
+  { nome: 'Português', sigla: 'PT', nivel: 'Nativo', proficiencia: 5 },
+  { nome: 'Inglês', sigla: 'EN', nivel: 'Avançado', proficiencia: 4 },
 ];
