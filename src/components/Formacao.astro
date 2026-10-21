@@ -23,20 +23,20 @@ import { formatarPeriodo } from '../utils/datas';
   </ul>
 
   <h3 class="subtitulo">Idiomas</h3>
-<ul class="idiomas">
-  {idiomas.map((idioma) => (
-    <li class="idioma">
-      <span class="sigla" aria-hidden="true">{idioma.sigla}</span>
-      <div>
-        <p class="nome">{idioma.nome}</p>
-        <p class="nivel">{idioma.nivel}</p>
-      </div>
-      <span class="medidor" role="img" aria-label={`Nível ${idioma.proficiencia} de 5`}>
-        {Array.from({ length: 5 }, (_, i) => <span class:list={{ cheio: i < idioma.proficiencia }} />)}
-      </span>
-    </li>
-  ))}
-</ul>
+  <ul class="idiomas">
+    {idiomas.map((idioma) => (
+      <li class="idioma">
+        <span class="sigla" aria-hidden="true">{idioma.sigla}</span>
+        <div>
+          <p class="nome">{idioma.nome}</p>
+          <p class="nivel">{idioma.nivel}</p>
+        </div>
+        <span class="medidor" role="img" aria-label={`Nível ${idioma.proficiencia} de 5`}>
+          {Array.from({ length: 5 }, (_, i) => <span class:list={{ cheio: i < idioma.proficiencia }} />)}
+        </span>
+      </li>
+    ))}
+  </ul>
 </section>
 
 <style>
@@ -136,5 +136,4 @@ import { formatarPeriodo } from '../utils/datas';
   .medidor .cheio {
     background: var(--accent);
   }
-
 </style>
