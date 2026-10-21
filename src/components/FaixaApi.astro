@@ -1,0 +1,84 @@
+<div class="faixa" data-api aria-hidden="true">
+  <span class="api-metodo">GET</span>
+  <span class="api-rota"></span>
+  <span class="api-status">···</span>
+  <span class="api-contador">00 / 00</span>
+  <div class="api-trilho"><div class="api-barra"></div></div>
+</div>
+
+<style>
+  .faixa {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: var(--faixa-h);
+    margin: 0 -24px;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .api-metodo {
+    padding: 1px 6px;
+    border-radius: 5px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .api-rota {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .api-status {
+    color: var(--accent);
+    transition: color 0.2s;
+  }
+
+  .faixa.carregando .api-status {
+    color: var(--text-dim);
+  }
+
+  .api-contador {
+    display: none;
+    color: var(--text-dim);
+  }
+
+  .api-trilho {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+  }
+
+  .api-barra {
+    height: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  @media (min-width: 480px) {
+    .api-contador {
+      display: inline;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .faixa {
+      display: none;
+    }
+  }
+</style>

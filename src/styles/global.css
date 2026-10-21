@@ -24,6 +24,7 @@
 
   --max-width: 1200px;
   --header-h: 64px;
+  --faixa-h: 40px;
   --radius: 10px;
   --radius-lg: 18px;
 }
@@ -37,6 +38,12 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-h);
+}
+
+@media (max-width: 959px) {
+  html {
+    scroll-padding-top: calc(var(--header-h) + var(--faixa-h));
+  }
 }
 
 body {

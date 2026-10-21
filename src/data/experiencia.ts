@@ -1,7 +1,14 @@
+import type { ImageMetadata } from 'astro';
+import mobilemed from '../assets/logos/mobilemed.png';
+import granaTech from '../assets/logos/grana-tech.png';
+import mazzaferroPesca from '../assets/logos/mazzaferro-pesca.png';
+import formula1 from '../assets/logos/formula-1.png';
+
 export interface Experiencia {
   empresa: string;
   slug: string;
   cargo: string;
+  logo?: ImageMetadata; // sem logo = mostra a inicial da empresa
   local?: string;
   inicio: string; // 'AAAA-MM'
   fim?: string; // sem fim = emprego atual
@@ -13,6 +20,7 @@ export const experiencias: Experiencia[] = [
   {
     empresa: 'MobileMed',
     slug: 'mobilemed',
+    logo: mobilemed,
     cargo: 'Desenvolvedor Back-end',
     local: 'Híbrido · São Bernardo do Campo, SP',
     inicio: '2025-06',
@@ -26,6 +34,7 @@ export const experiencias: Experiencia[] = [
   {
     empresa: 'Grana Tech - Crédito Popular',
     slug: 'grana-tech',
+    logo: granaTech,
     cargo: 'Estágio de Desenvolvedor',
     local: 'Híbrido · São Paulo, SP',
     inicio: '2024-10',
@@ -40,6 +49,7 @@ export const experiencias: Experiencia[] = [
   {
     empresa: 'Mazzaferro Pesca',
     slug: 'mazzaferro-pesca',
+    logo: mazzaferroPesca,
     cargo: 'Estagiário de TI',
     local: 'Híbrido · Diadema, SP',
     inicio: '2024-04',
@@ -53,6 +63,7 @@ export const experiencias: Experiencia[] = [
   {
     empresa: 'Formula 1',
     slug: 'formula-1',
+    logo: formula1,
     cargo: 'Vendas e Tradução Freelancer',
     inicio: '2022-11',
     fim: '2022-11',

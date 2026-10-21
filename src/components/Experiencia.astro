@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { experiencias } from '../data/experiencia';
 import { formatarPeriodo } from '../utils/datas';
 
@@ -21,7 +22,11 @@ const primeiroAno = Math.min(...experiencias.map((exp) => Number(exp.inicio.slic
         <p class="periodo">{formatarPeriodo(exp.inicio, exp.fim)}</p>
 
         <div class="empresa">
-          <span class="logo" aria-hidden="true">{exp.empresa[0]}</span>
+          {exp.logo ? (
+            <Image src={exp.logo} alt="" width={44} height={44} densities={[1, 2]} class="logo" />
+          ) : (
+            <span class="logo" aria-hidden="true">{exp.empresa[0]}</span>
+          )}
           <div>
             <h3>{exp.empresa}</h3>
             <p class="cargo">
@@ -114,6 +119,7 @@ const primeiroAno = Math.min(...experiencias.map((exp) => Number(exp.inicio.slic
     font-family: var(--font-mono);
     font-size: 18px;
     color: var(--accent);
+    object-fit: cover;
   }
 
   h3 {

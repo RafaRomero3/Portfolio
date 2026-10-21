@@ -45,7 +45,7 @@ import { perfil } from '../data/site';
     </dl>
   </figure>
 
-  <div class="cartao api" aria-hidden="true">
+  <div class="cartao api" data-api aria-hidden="true">
     <div class="cartao-topo">
       <span></span><span></span><span></span>
       <code>api.rafael.dev</code>
@@ -325,7 +325,7 @@ import { perfil } from '../data/site';
     .sidebar {
       position: sticky;
       top: var(--header-h);
-      height: calc(100vh - var(--header-h));
+      height: min(calc(100vh - var(--header-h)), 820px);
       overflow-y: auto;
       scrollbar-width: none;
       padding: clamp(16px, 4vh, 40px) 0 clamp(28px, 5vh, 56px);
@@ -387,30 +387,35 @@ import { perfil } from '../data/site';
 </style>
 
 <script>
-  const painel = document.querySelector<HTMLElement>('.api');
+  const visores = Array.from(document.querySelectorAll<HTMLElement>('[data-api]'));
   const passos = Array.from(document.querySelectorAll<HTMLElement>('[data-endpoint]'));
   const reduzirMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (painel && passos.length > 0) {
-    const metodo = painel.querySelector<HTMLElement>('.api-metodo')!;
-    const rota = painel.querySelector<HTMLElement>('.api-rota')!;
-    const status = painel.querySelector<HTMLElement>('.api-status')!;
-    const detalhe = painel.querySelector<HTMLElement>('.api-detalhe')!;
-    const contador = painel.querySelector<HTMLElement>('.api-contador')!;
-    const barra = painel.querySelector<HTMLElement>('.api-barra')!;
+  if (visores.length > 0 && passos.length > 0) {
+    const buscar = (seletor: string) =>
+      visores.flatMap((visor) => Array.from(visor.querySelectorAll<HTMLElement>(seletor)));
+    const escrever = (elementos: HTMLElement[], texto: string) =>
+      elementos.forEach((elemento) => (elemento.textContent = texto));
+
+    const metodos = buscar('.api-metodo');
+    const rotas = buscar('.api-rota');
+    const status = buscar('.api-status');
+    const detalhes = buscar('.api-detalhe');
+    const contadores = buscar('.api-contador');
+    const barras = buscar('.api-barra');
 
     const total = String(passos.length).padStart(2, '0');
     let atual = -1;
     let timer: number | undefined;
 
     const responder = (passo: HTMLElement) => {
-      painel.classList.remove('carregando');
-      status.textContent = passo.dataset.status ?? '200 OK';
-      detalhe.textContent = passo.dataset.detalhe ?? '';
+      visores.forEach((visor) => visor.classList.remove('carregando'));
+      escrever(status, passo.dataset.status ?? '200 OK');
+      escrever(detalhes, passo.dataset.detalhe ?? '');
     };
 
     const digitar = (caminho: string, passo: HTMLElement, letras: number) => {
-      rota.textContent = caminho.slice(0, letras);
+      escrever(rotas, caminho.slice(0, letras));
       if (letras < caminho.length) {
         timer = window.setTimeout(() => digitar(caminho, passo, letras + 1), 30);
       } else {
@@ -426,24 +431,24 @@ import { perfil } from '../data/site';
       const [verbo, caminho] = passo.dataset.endpoint!.split(' ');
 
       passos.forEach((p, i) => p.classList.toggle('ativo', i === indice));
-      metodo.textContent = verbo;
-      contador.textContent = `${String(indice + 1).padStart(2, '0')} / ${total}`;
-      barra.style.transform = `scaleX(${(indice + 1) / passos.length})`;
+      escrever(metodos, verbo);
+      escrever(contadores, `${String(indice + 1).padStart(2, '0')} / ${total}`);
+      barras.forEach((barra) => (barra.style.transform = `scaleX(${(indice + 1) / passos.length})`));
 
       clearTimeout(timer);
 
       if (reduzirMovimento) {
-        rota.textContent = caminho;
+        escrever(rotas, caminho);
         responder(passo);
         return;
       }
 
-      painel.classList.add('carregando');
-      status.textContent = '···';
-      detalhe.textContent = '';
+      visores.forEach((visor) => visor.classList.add('carregando'));
+      escrever(status, '···');
+      escrever(detalhes, '');
 
       // mantém o trecho igual ao da rota anterior e digita só o resto
-      const anterior = rota.textContent ?? '';
+      const anterior = rotas[0].textContent ?? '';
       let comum = 0;
       while (comum < anterior.length && anterior[comum] === caminho[comum]) comum++;
       digitar(caminho, passo, comum);
