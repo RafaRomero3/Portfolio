@@ -2,7 +2,7 @@
 
 Portfólio pessoal de Rafael Romero, desenvolvedor de software com foco em back-end (Node.js, NestJS e APIs REST).
 
-**Site:** [endereço do site]
+**Site:** [rafael-romero.vercel.app](https://rafael-romero.vercel.app)
 
 ![Prévia do portfólio](public/og.png)
 
